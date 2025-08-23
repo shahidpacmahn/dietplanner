@@ -24,7 +24,7 @@ def get_pdf_download_link(text, filename="diet_plan.pdf"):
 
 st.set_page_config(page_title="Diet-Planner", page_icon="🍎", layout="wide")
 
-st.title("🍎 Diet-Planner 🍎")
+st.title("🍎 Shaik Bite 🍎")
 st.markdown("### Your Personalized Diet Assistant!")
 
 st.write("This app helps you generate a personalized diet plan based on your specific needs and preferences.")
@@ -71,6 +71,9 @@ with st.form("user_input_form"):
         dinner_quantity = st.text_input("How much of it do you eat?", key="dinner_quantity")
         is_dinner_cooked = st.checkbox("Is it cooked?", key="is_dinner_cooked")
 
+    st.subheader("Extra Food/Snacks")
+    extra_food = st.text_area("Do you eat anything extra apart from the 3 main meals? If so, what and how much?")
+
     submitted = st.form_submit_button("Generate Diet Plan")
 
     if submitted:
@@ -88,6 +91,7 @@ with st.form("user_input_form"):
         - Breakfast: {breakfast_quantity} of {breakfast_food} ({breakfast_cooked_status}).
         - Lunch: {lunch_quantity} of {lunch_food} ({lunch_cooked_status}).
         - Dinner: {dinner_quantity} of {dinner_food} ({dinner_cooked_status}).
+        - Extra food/snacks: {extra_food}
 
         Please provide a new, healthier diet plan.
         """
