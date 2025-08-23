@@ -11,9 +11,9 @@ except Exception as e:
     st.error(f"Error initializing Gemini API: {e}")
     st.stop()
 
-st.set_page_config(page_title="Shaik Bite", page_icon="🍔", layout="wide")
+st.set_page_config(page_title="Shaik Bite", page_icon="🥚", layout="wide")
 
-st.markdown("<h1 style='text-align: center; color: #ff4b4b;'>🍔 Shaik Bite 🍔</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #ff4b4b;'>🥚 Shaik Bite 🥩</h1>", unsafe_allow_html=True)
 st.markdown("### Your Personalized Diet Assistant!")
 
 st.write("This app helps you generate a personalized diet plan based on your specific needs and preferences.")
@@ -86,5 +86,5 @@ with st.form("user_input_form"):
             st.markdown(response.text)
 
 st.markdown("---")
-st.markdown("<div style='text-align: center;'>© 2025 Shaik Bite. All rights reserved.</div>", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center;'>© 2024 Shaik Bite. All rights reserved.</div>", unsafe_allow_html=True)
 st.markdown("<div style='text-align: center;'>Developed by pacman</div>", unsafe_allow_html=True)
