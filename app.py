@@ -1,8 +1,6 @@
 
 import streamlit as st
 import google.generativeai as genai
-from fpdf import FPDF
-import base64
 
 # Load API key from Streamlit secrets
 try:
@@ -13,24 +11,12 @@ except Exception as e:
     st.error(f"Error initializing Gemini API: {e}")
     st.stop()
 
-def get_pdf_download_link(text, filename="diet_plan.pdf"):
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 10, text)
-    pdf_output = pdf.output(dest='S').encode('latin-1')
-    b64 = base64.b64encode(pdf_output).decode()
-    return f'<a href="data:application/octet-stream;base64,{b64}" download="{filename}">Download Diet Plan as PDF</a>'
+st.set_page_config(page_title="Shaik Bite", page_icon="🍔", layout="wide")
 
-st.set_page_config(page_title="Diet-Planner", page_icon="🍎", layout="wide")
-
-st.title("🍎 Shaik Bite 🍎")
+st.markdown("<h1 style='text-align: center; color: #ff4b4b;'>🍔 Shaik Bite 🍔</h1>", unsafe_allow_html=True)
 st.markdown("### Your Personalized Diet Assistant!")
 
 st.write("This app helps you generate a personalized diet plan based on your specific needs and preferences.")
-
-if 'response' not in st.session_state:
-    st.session_state.response = ''
 
 with st.form("user_input_form"):
     col1, col2 = st.columns(2)
@@ -48,7 +34,7 @@ with st.form("user_input_form"):
         health_goals = st.selectbox("Primary Goal", ["Build Muscle", "Getting Lean / Weight Loss"])
         physical_activity = st.selectbox(
             "Physical Activity Level",
-            ["Lite (walking)", "Medium (3-4 days of exercise)", "Hardcore (intense daily exercise)"]
+            ["Lite exercise", "Medium (3-4 days of exercise)", "Hardcore (intense daily exercise)"]
         )
 
     st.subheader("Current Meal Details")
@@ -93,12 +79,12 @@ with st.form("user_input_form"):
         - Dinner: {dinner_quantity} of {dinner_food} ({dinner_cooked_status}).
         - Extra food/snacks: {extra_food}
 
-        Please provide a new, healthier diet plan.
+        Please provide a new, healthier diet plan.all weight should be in grams and height in cms.
         """
         with st.spinner("Generating your diet plan..."):
             response = model.generate_content(prompt)
-            st.session_state.response = response.text
+            st.markdown(response.text)
 
-if st.session_state.response:
-    st.markdown(st.session_state.response)
-    st.markdown(get_pdf_download_link(st.session_state.response), unsafe_allow_html=True)
+st.markdown("---")
+st.markdown("<div style='text-align: center;'>© 2025 Shaik Bite. All rights reserved.</div>", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center;'>Developed by pacman</div>", unsafe_allow_html=True)
